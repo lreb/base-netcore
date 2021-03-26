@@ -37,6 +37,13 @@ steps:
       dir
 
 - task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: 'src/Base.Test.Unit/Base.Test.Unit.csproj'
+    arguments: '--no-restore'
+  displayName: 'Run Tests'
+
+- task: DotNetCoreCLI@2
   displayName: 'Publish Api'
   inputs:
     command: 'publish'
