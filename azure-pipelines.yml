@@ -67,7 +67,3 @@ steps:
   inputs:
         pathtoPublish: '$(Build.ArtifactStagingDirectory)/API_$(Build.BuildNumber)' 
         artifactName: 'Api_LatestBuild' 
-
-
-
-
