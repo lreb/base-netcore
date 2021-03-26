@@ -51,15 +51,16 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: 'src/Base.API/Base.API.csproj'
-    arguments: '--configuration $(buildConfiguration) --no-restore -o $(Build.ArtifactStagingDirectory)/Output'
+    arguments: '--configuration $(buildConfiguration) --no-restore -o $(Build.ArtifactStagingDirectory)/windows'
     modifyOutputPath: false
+    zipAfterPublish: true
     
 - task: CmdLine@2
   inputs:
     script: |
-      echo Workin on: $(Build.ArtifactStagingDirectory)/Output
+      echo Workin on: $(Build.ArtifactStagingDirectory)
       dir
-    workingDirectory: $(Build.ArtifactStagingDirectory)/Output
+    workingDirectory: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
   displayName: "Upload Artifacts Windows"
