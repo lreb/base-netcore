@@ -15,11 +15,17 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'restore'
+    projects: '**/*.csproj'
+  displayName: 'Restore Nuget Packages'
 
 - task: DotNetCoreCLI@2
-  displayName: ".Net Core 5.0.x"
+  displayName: "Build project - .Net Core 5.0.x"
   inputs:
     command: 'build'
+    arguments: '--no-restore'
     projects: 'src/Base.API/Base.API.csproj'
 - task: CmdLine@2
   inputs:
@@ -31,7 +37,11 @@ steps:
       dir
 
 - task: DotNetCoreCLI@2
+  displayName: 'Publish Api'
   inputs:
     command: 'publish'
-    publishWebProjects: true
+    publishWebProjects: false
+    projects: 'src/Base.API/Base.API.csproj'
+    arguments: '--configuration $(buildConfiguration) --no-restore'
+    modifyOutputPath: false
 
