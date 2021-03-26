@@ -15,7 +15,23 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+
+- task: DotNetCoreCLI@2
+  displayName: ".Net Core 5.0.x"
+  inputs:
+    command: 'build'
+    projects: 'src/Base.API/Base.API.csproj'
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo Write your commands here
+      
+      echo Hello world
+      
+      dir
+
 - task: NuGetToolInstaller@1
+
 
 - task: NuGetCommand@2
   inputs:
