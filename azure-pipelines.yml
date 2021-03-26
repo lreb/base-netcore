@@ -13,7 +13,7 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
-  system.debug: false
+  system.debug: true
 
 steps:
 - task: DotNetCoreCLI@2
@@ -54,17 +54,19 @@ steps:
     arguments: '--configuration $(buildConfiguration) --no-restore -o $(Build.ArtifactStagingDirectory)/Output'
     modifyOutputPath: false
     
-- task: PublishBuildArtifacts@1
-  displayName: "Upload Artifacts Windows"
-  inputs:
-        pathtoPublish: '$(Build.ArtifactStagingDirectory)/win' 
-        artifactName: 'artifactWindows' 
-
 - task: CmdLine@2
   inputs:
     script: |
       echo Workin on: $(Build.ArtifactStagingDirectory)/Output
       dir
     workingDirectory: $(Build.ArtifactStagingDirectory)/Output
+
+- task: PublishBuildArtifacts@1
+  displayName: "Upload Artifacts Windows"
+  inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
+        artifactName: 'artifactWindows' 
+
+
 
 
