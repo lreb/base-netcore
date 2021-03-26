@@ -51,7 +51,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: 'src/Base.API/Base.API.csproj'
-    arguments: '--configuration $(buildConfiguration) --no-restore -o $(Build.ArtifactStagingDirectory)'
+    arguments: '--configuration $(buildConfiguration) --no-restore -o $(Build.ArtifactStagingDirectory)/API_$(Build.BuildNumber)'
     modifyOutputPath: false
     zipAfterPublish: true
     
@@ -65,8 +65,8 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: "Upload Artifacts Windows"
   inputs:
-        pathtoPublish: '$(Build.ArtifactStagingDirectory)' 
-        artifactName: 'base-api-win' 
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)/API_$(Build.BuildNumber)' 
+        artifactName: 'Api_LatestBuild' 
 
 
 
