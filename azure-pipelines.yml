@@ -49,6 +49,13 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: 'src/Base.API/Base.API.csproj'
-    arguments: '--configuration $(buildConfiguration) --no-restore -o $(Build.ArtifactStagingDirectory)/Output'
+    arguments: '--configuration $(buildConfiguration) --no-restore -o - 
     modifyOutputPath: false
 
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo Workin on: $(Build.ArtifactStagingDirectory)/Output
+      
+      dir
+    workingDirectory: '$(Build.ArtifactStagingDirectory)/Output'
