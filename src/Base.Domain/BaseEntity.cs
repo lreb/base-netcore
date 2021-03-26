@@ -16,8 +16,8 @@ namespace Base.Domain
     public class BaseEntityFull : BaseEntitySoftDelete
     {
         public DateTime CreatedOn { get; set; }
-        public int CreatedBy { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public int UpdatedBy { get; set; }
+        public int? CreatedBy { get; set; }
+        public DateTime? UpdatedOn { get; set; }
+        public int? UpdatedBy { get; set; }
     }
 }
