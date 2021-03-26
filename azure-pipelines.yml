@@ -52,11 +52,6 @@ steps:
     arguments: '--configuration $(buildConfiguration) --no-restore -o - 
     modifyOutputPath: false
 
-task: CmdLine@2
-  inputs:
-    script: 'echo ''Workin on: $(Build.ArtifactStagingDirectory)/Output'''
-    workingDirectory: '$(Build.ArtifactStagingDirectory)/Output'
-
 - task: CmdLine@2
   inputs:
     script: |
