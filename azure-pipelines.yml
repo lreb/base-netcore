@@ -13,13 +13,15 @@ variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  system.debug: true
 
 steps:
 - task: DotNetCoreCLI@2
+  displayName: 'Install .Net SDK'
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
-  displayName: 'Restore Nuget Packages'
+  
 
 - task: DotNetCoreCLI@2
   displayName: "Build project - .Net Core 5.0.x"
@@ -37,11 +39,31 @@ steps:
       dir
 
 - task: DotNetCoreCLI@2
-  displayName: 'Publish Api'
+  inputs:
+    command: 'test'
+    projects: 'src/Base.Test.Unit/Base.Test.Unit.csproj'
+    arguments: '--no-restore'
+  displayName: 'Run Tests'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publish dotnet Api'
   inputs:
     command: 'publish'
     publishWebProjects: false
     projects: 'src/Base.API/Base.API.csproj'
-    arguments: '--configuration $(buildConfiguration) --no-restore'
+    arguments: '--configuration $(buildConfiguration) --no-restore -o $(Build.ArtifactStagingDirectory)/API_$(Build.BuildNumber)'
     modifyOutputPath: false
+    zipAfterPublish: true
+    
+- task: CmdLine@2
+  inputs:
+    script: |
+      echo Workin on: $(Build.ArtifactStagingDirectory)
+      dir
+    workingDirectory: $(Build.ArtifactStagingDirectory)
 
+- task: PublishBuildArtifacts@1
+  displayName: "Upload Artifacts Windows"
+  inputs:
+        pathtoPublish: '$(Build.ArtifactStagingDirectory)/API_$(Build.BuildNumber)' 
+        artifactName: 'Api_LatestBuild' 
