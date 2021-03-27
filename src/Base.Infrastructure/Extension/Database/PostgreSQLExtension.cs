@@ -22,7 +22,7 @@ namespace Base.Infrastructure.Extension.Database
         /// <param name="serviceCollection">The <see cref="IServiceCollection"/></param>
         /// <param name="configuration">The data migration connection string <see cref="IConfiguration"/></param>
         /// <param name="configRoot">The data migration connection string <see cref="IConfigurationRoot"/></param>
-        public static void UsePostgreSqlServer(this IServiceCollection serviceCollection, string connectionString)
+        public static void UsePostgreSqlServer(this IServiceCollection serviceCollection, string connectionString, IConfiguration configuration)
         //IConfiguration configuration, IConfigurationRoot configRoot)
         {
             // https://www.npgsql.org/efcore/api/Microsoft.Extensions.DependencyInjection.NpgsqlServiceCollectionExtensions.html#Microsoft_Extensions_DependencyInjection_NpgsqlServiceCollectionExtensions_AddEntityFrameworkNpgsql_IServiceCollection_
@@ -35,6 +35,8 @@ namespace Base.Infrastructure.Extension.Database
                   //options.UseNpgsql(configuration.GetConnectionString("PostgreSqlConnection") ?? configRoot["ConnectionStrings:PostgreSqlConnection"]
                   options.UseNpgsql(connectionString
                   , b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+
+            serviceCollection.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
         }
 
     }

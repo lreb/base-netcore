@@ -1,21 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Base.Infrastructure.Extension.Database;
+using Base.Infrastructure.Extension.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace Base.API
 {
-    public class Startup
+	public class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -36,11 +30,13 @@ namespace Base.API
 
             #region Database context service
             // TODO: before use this, create your own dbcontext
-            services.UsePostgreSqlServer(_configuration.GetConnectionString("DefaultConnection"));
+            services.UsePostgreSqlServer(_configuration.GetConnectionString("DefaultConnection"), _configuration);
 
             // in memory db
             // services.UseInMemoryDatabase();
             #endregion
+
+            services.AddApplication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

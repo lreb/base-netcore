@@ -5,6 +5,8 @@ base of net core application
 ## Setup
 
 
+
+
 ### WSL 2
 
 SDK manual installation 
@@ -24,3 +26,9 @@ https://stackoverflow.com/questions/55535177/omnisharp-msbuild-projectmanager-at
 
 mono
 https://www.mono-project.com/download/stable/
+
+## Sources
+onion architecture
+https://codewithmukesh.com/blog/onion-architecture-in-aspnet-core/
+mediatr
+https://codewithmukesh.com/blog/cqrs-in-aspnet-core-3-1/
