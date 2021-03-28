@@ -1,14 +1,11 @@
 ﻿using Base.Persistence;
+using Base.Service.Features.ItemFeatures.Command;
 using Base.Service.Features.ItemFeatures.Query;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-// HttpContext.RequestServices.GetService<IMediator>();
+// import RequestServices.GetService<IMediator>();
 using Microsoft.Extensions.DependencyInjection;
-using Base.Service.Features.ItemFeatures.Command;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -35,24 +32,36 @@ namespace Base.API.Controllers
 		public async Task<IActionResult> Get()
 		{
 			return Ok(await Mediator.Send(new GetAllItemsQuery()));
-			//return Ok(_db.Items.ToList());
 		}
 
-		// GET api/<ItemsController>/5
+		/// <summary>
+		/// Get item by id
+		/// </summary>
+		/// <param name="id">item identifier</param>
+		/// <returns></returns>
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetById(int id)
 		{
 			return Ok(await Mediator.Send(new GetItemByIdQuery { Id = id }));
 		}
 
-		// POST api/<ItemsController>
+		/// <summary>
+		/// Create item
+		/// </summary>
+		/// <param name="command">item data</param>
+		/// <returns></returns>
 		[HttpPost]
 		public async Task<IActionResult> Create(CreateItemCommand command)
 		{
 			return Ok(await Mediator.Send(command));
 		}
 
-		// PUT api/<ItemsController>/5
+		/// <summary>
+		/// Update item
+		/// </summary>
+		/// <param name="id">item id</param>
+		/// <param name="command">item id</param>
+		/// <returns></returns>
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, UpdateItemCommand command)
 		{
@@ -63,7 +72,11 @@ namespace Base.API.Controllers
 			return Ok(await Mediator.Send(command));
 		}
 
-		// DELETE api/<ItemsController>/5
+		/// <summary>
+		/// Delete item
+		/// </summary>
+		/// <param name="id">item id</param>
+		/// <returns></returns>
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(int id)
 		{

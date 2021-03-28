@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Base.API</name>
+    </assembly>
+    <members>
+        <member name="M:Base.API.Controllers.ItemsController.Get">
+            <summary>
+            Get all items
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Base.API.Controllers.ItemsController.GetById(System.Int32)">
+            <summary>
+            Get item by id
+            </summary>
+            <param name="id">item identifier</param>
+            <returns></returns>
+        </member>
+        <member name="M:Base.API.Controllers.ItemsController.Create(Base.Service.Features.ItemFeatures.Command.CreateItemCommand)">
+            <summary>
+            Create item
+            </summary>
+            <param name="command">item data</param>
+            <returns></returns>
+        </member>
+        <member name="M:Base.API.Controllers.ItemsController.Update(System.Int32,Base.Service.Features.ItemFeatures.Command.UpdateItemCommand)">
+            <summary>
+            Update item
+            </summary>
+            <param name="id">item id</param>
+            <param name="command">item id</param>
+            <returns></returns>
+        </member>
+        <member name="M:Base.API.Controllers.ItemsController.Delete(System.Int32)">
+            <summary>
+            Delete item
+            </summary>
+            <param name="id">item id</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
